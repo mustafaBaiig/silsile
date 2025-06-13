@@ -63,7 +63,7 @@ export default function ProductsPage() {
               >
                 <Link href={`/products/${product.id}`} className="block relative h-72 overflow-hidden">
                   <Image
-                    src="/products/homepage.jpg"
+                    src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"

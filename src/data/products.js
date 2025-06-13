@@ -17,7 +17,7 @@ const products = [
     name: "Casual White T-Shirt",
     category: "T-Shirts",
     price: 299,
-    image: "/placeholder.svg?height=256&width=384",
+    image: "/products/Mustafa.png",
     rating: 5,
     reviews: 45,
     description: "A comfortable and stylish white t-shirt for everyday wear.",
