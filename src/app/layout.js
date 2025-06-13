@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning={true}>
         <CartProvider>
           <Navbar />
           {children}

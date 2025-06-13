@@ -77,31 +77,49 @@ export default function CheckoutPage() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+  e.preventDefault();
 
-    if (!validateForm()) {
-      return
-    }
-
-    setIsSubmitting(true)
-
-    // Simulate API call
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      // Generate order ID
-      const newOrderId = "ORD-" + Date.now().toString().slice(-6)
-      setOrderId(newOrderId)
-
-      // Clear cart and show success
-      clearCart()
-      setOrderPlaced(true)
-    } catch (error) {
-      console.error("Order submission failed:", error)
-    } finally {
-      setIsSubmitting(false)
-    }
+  if (!validateForm()) {
+    return;
   }
+
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch("http://localhost:5000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: customerDetails.name,
+        email: customerDetails.email,
+        phoneNumber: customerDetails.phone,
+        streetAddress: customerDetails.address,
+        city: customerDetails.city,
+        postalCode: customerDetails.postalCode,
+        items: cart,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to place order");
+    }
+
+    const data = await response.json();
+
+    setOrderId(data.order?.id || "ORD-" + Date.now().toString().slice(-6));
+    clearCart();
+    setOrderPlaced(true);
+  } catch (error) {
+    console.error("Order submission failed:", error);
+    alert("Failed to place order. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
 
   if (cart.length === 0 && !orderPlaced) {
     return (
