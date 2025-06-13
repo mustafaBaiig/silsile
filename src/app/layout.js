@@ -1,17 +1,22 @@
-import './globals.css'
-import Navbar from '../components/Navbar'
+import "./globals.css"
+import Navbar from "../components/Navbar"
+import Footer from "../components/footer"
+import { CartProvider } from "../context/cart-context"
 
 export const metadata = {
-  title: 'Silsile - Clothing Store',
-  description: 'Shop the latest trends with Silsile.',
+  title: "Silsile - Fashion Store",
+  description: "Discover your style with premium fashion items",
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className="antialiased">
+        <CartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )

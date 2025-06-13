@@ -4,7 +4,7 @@ const products = [
     name: "Elegant Black Dress",
     category: "Dresses",
     price: 799,
-    originalPrice: 999,
+    /*originalPrice: 999,*/
     discount: 20,
     image: "/products/Mustafa.png",
     rating: 4,
